@@ -1,0 +1,58 @@
+#RacerStatsMod {
+    float: left;
+    width: 300px;
+    /*height: calc(100vh - 150px);*/
+}
+
+#RacerStatsMod div {
+    background: #eee;
+    box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.3);
+    padding: 5px;
+    margin-top: 20px;
+}
+
+#RacerStatsList {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: flex-start;
+    height: calc(100vh - 150px);
+    padding: 10px;
+    overflow: auto;
+    /*width: calc(100% - 300px);*/
+    min-width: 350px;
+}
+
+#RacerStatsList ul{
+    flex: 0 0 auto;
+    list-style: none;
+    padding: 10px 5px 10px 10px;
+    background: #eee;
+    box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.3);
+    margin: 0px 0px 10px 10px;
+    width: 285px;
+}
+
+#RacerStatsList ul:hover {
+    box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.5), 5px 5px 13px 1px rgba(0,0,0,0.3);
+}
+
+#RacerStatsList .rank-included {
+    color: rgb(206,17,38);
+    background-color: rgba(252, 209, 22,0.4);
+}
+
+.faicon {
+    font-family: FontAwesome; 
+    position: relative; 
+    font-size: 1.5em;
+    color: #003f87;
+    cursor: pointer;
+    text-align: right;
+    left: calc(100% - 45px);
+    margin-right: 10px;
+}
+.faicon:hover {
+    text-shadow: -1px -1px 3px rgba(252, 209, 22,1), 2px 2px 5px rgba(0,0,0,0.6),4px 4px 11px rgba(0,0,0,0.3);
+}

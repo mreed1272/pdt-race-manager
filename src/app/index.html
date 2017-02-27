@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf=-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>PDT Race Manager</title>
+	<link rel="stylesheet" href="index.css">
+	<link rel="stylesheet" href="test-track.css">
+	<link rel="stylesheet" href="edit-racer.css">
+	<link rel="stylesheet" href="run-race.css">
+	<script src="index.js"></script>
+	<script src="serial.js"></script>
+	<script src="test-track.js"></script>
+	<script src="edit-racer.js"></script>
+	<script src="run-race.js"></script>
+</head>
+
+<body onload="onBodyLoad()">
+<div id="mainContent" class="main">
+	<div class="tabBox" id="tabbedItems">
+
+		<!--Start of defining menu tabs-->
+		<ul class="tabrow">
+			<span style="width: 10px; display: inline-block;"> </span>
+			<li class="selected" onclick="openTabContent(event,'mainT')">
+				<img class="tabsImg" src="images/PDT-main.png" style="width: 40px; height: 40px;">
+				<a href="javascript:void(0);">PDT Main</a>
+			</li>
+			<li onclick="openTabContent(event,'testTrackT')">
+				<img class="tabsImg" src="images/stopwatch.png" style="width: 34.1px; height: 40px;">
+				<a href="javascript:void(0);">Test Track</a>
+			</li>
+			<li onclick="openTabContent(event,'editRacersT')">
+				<img class="tabsImg" src="images/helmut.png" style="width: 41px; height: 40px;">
+				<a href="javascript:void(0);">Edit Racers</a>
+			</li>
+			<li onclick="openTabContent(event,'runRaceT')">
+				<img class="tabsImg" src="images/race.png" style="width: 87px; height: 40px;">
+				<a href="javascript:void(0);">Run Race</a>
+			</li>
+			<li onclick="openTabContent(event,'PDT-configT')">
+				<img class="tabsImg" src="images/Settings-scout.png" style="width: 39px; height: 40px;">
+				<a href="javascript:void(0);">Configure PDT<br/>Race Manager</a>
+			</li>
+		</ul>
+		<!--End of defining menu tabs-->
+
+		<!--Tab Content - Main Tab Body-->
+		<div class="tabcontent" id="mainT">
+
+			<div id="RaceInfo">
+				<button id="new-race" type="button" onclick="checkRaceDialog('new')">New Race</button>
+				<button id="load-race" type="button" onclick="loadRace()">Load Race</button>
+				<button id="save-race" type="button" onclick="saveRace()">Save Race</button>
+				<div class="fileBox"><label for="RaceInfoFile">Race File: </label><span id="RaceInfoFile"></span></div>
+			</div>
+			<div id="RaceSideDialog" class="sideDialog">
+				<div style="display: flex; justify-content: space-between">
+					  <h2></h2><span class="close" onclick="editRaceDialog('close')">&times;</span>
+  				</div>
+					<div id="RaceDialogContent" >
+						<table>
+							<tr>
+								<td>Organization Name:</td>
+								<td>
+									<input type="text" name="orgName" id="orgName" value="">
+								</td>
+							</tr>
+							<tr>
+								<td>Organization Type:</td>
+								<td>
+									<select id="OrgTypeSelect" onchange="loadRanks(this.value)"></select>
+								</td>
+							</tr>
+							<tr>
+								<td>Ranks to include:</td>
+								<td id="orgRankInclude"></td>
+							</tr>
+							<tr>
+								<td>Number of Rounds:</td>
+								<td><input type="text" name="raceRounds" id="raceRounds" value=""></td>
+							</tr>
+							<tr>
+								<td>Scoring method:</td>
+								<td>
+									<select id="raceScoreMethod">
+										<option value="timed">Fastest Time</option>
+										<option value="points">Point Elimination</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>Race Coordinator:</td>
+								<td>
+									<input type="text" name="raceCoord" id="raceCoord" value="">
+								</td>
+							</tr>
+							<tr>
+								<td>Race Date:</td>
+								<td>
+									<input type="date" name="raceDate" id="raceDate" value="">
+								</td>
+							</tr>
+							<tr>
+								<td>Racer File:</td>
+								<td id="racerFileInput"></td>
+							</tr>
+						</table>
+						<button type="button" id="editRaceButton" onclick="editRaceDialog('update')"></button>
+						<button type="button" id="cancelButton" onclick="editRaceDialog('cancel')">Cancel</button>
+					</div>
+			</div><!--RaceSideDialog-->
+
+			<div id="RaceInfoDisplay"></div>
+
+			<div id="RacerInfo">No racers entered.</div>
+		</div>
+		<!--End Tab Content - Main Tab Body-->
+
+		<!--Tab Content - Test Track-->
+		<div class="tabcontent" id="testTrackT">
+			<div class="flex-contain">
+				<div class="fileBox"> Choose Lane to test:
+					<select id="test-lane-watch" onchange="setLane(this.value)">
+						<option value="0" selected>all</option>
+					</select>
+					<br/>
+					<button id="reset-pdt" onclick="resetArduino()">Reset Timer</button>
+				</div>
+				<div class="fileBox" style="min-width: 425px;">
+					<label style="vertical-align: top;" for="textarea">Notes:</label>
+					<textarea style="vertical-align: top;" rows="5" cols="40" id="test-notes"></textarea>
+				</div>
+				<div class="fileBox"> Session date:
+					<time id="test-date"></time>
+				</div>
+			</div>
+			<div id="lane-times-contain">
+				<button id="clear-display" onclick="clearDisplay()">Clear Display</button>
+				<ul class="laneTimes div-contain-shadow" id="tlane">
+				</ul>
+			</div>
+			<div id="timer-history-contain">
+				<button id="clear-history" onclick="clearHistory()">Clear History</button>
+				<button id="save-history" onclick="saveHistory()">Save History</button>
+				<button id="load-history" onclick="loadHistory()">Load History</button>
+				<div id="table-history-contain" class="div-contain-shadow">
+					<table id="lane-history-table">
+						<tr>
+							<th>Run # (Lane)</th>
+							<th>Time (s)</th>
+							<th>Delta (s)</th>
+						</tr>
+
+					</table>			
+				</div>
+			</div>
+			<form id="serial-display" onsubmit="return false;"> Serial Command:
+				<input type="text" id="serial-command">
+				<button id="send-serial" onclick="sendSerialForm()">Send</button><br/>
+				<div id="serial-output" class="div-contain-shadow"></div>
+			</form>
+
+		</div>
+		<!--End Tab Content - Test Track-->
+
+		<!--Tab Content - Racers-->
+		<div class="tabcontent" id="editRacersT">
+			<div id="RacerStatsMod">
+				
+				<button type="button" onclick="loadRacers()">Load File</button>
+				<button type="button" onclick="saveRacers()">Save File</button>
+				<button type="button" onclick="clearRacers()">Clear Racers</button>
+				<p class="fileBox" style="margin-left: 0px;">
+					<label>Racer File: </label>
+					<span id="racer-data-file">none</span>
+				</p>
+				<div>
+					<table style="border-collapse: collapse">
+						<tr>
+							<td>
+								<label for="CarNum">Car Number:</label>
+							</td>
+							<td>
+								<input type="text" name="CarNum" id="CarNum" value="" placeholder="Car Number">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="RacerName">Racer Name:</label>
+							</td>
+							<td>
+								<input type="text" name="RacerName" id="RacerName" value="" placeholder="Racer Name">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="CarWeight">Car Weight (oz):</label>
+							</td>
+							<td>
+								<input type="text" name="CarWeight" id="CarWeight" value="" placeholder="Car Weight">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<label for="RacerRank">Racer Rank:</label>
+							</td>
+							<td>
+								<select id="RacerRank"></select>
+							</td>
+						</tr>
+					</table>
+					<br/>
+					<button id="buttonAddRacer" type="button" onclick="addRacer('add')">Add Racer</button>
+					<button id="buttonCancelRacer" type="button" onclick="addRacer('cancel')">Cancel</button>
+				</div>
+			</div>
+			<div id="RacerStatsList"></div>
+		</div>
+		<!--End Tab Content - Racers-->
+
+		<!--Tab Content - Run the Race-->
+		<div class="tabcontent" id="runRaceT">
+			<div id="race-current-heat">
+				<div id="race-divButtons-1">
+					<button type="button" id="start-race"  onclick="setupRace()">Start Race</button>
+					<button type="button" id="save-results" onclick="saveResults()" disabled>Save Race</button>
+					<button type="button" id="buttonSpecWinOpen" onclick="specWin('open');">Open Spectator Window</button>
+					<button type="button" id="buttonSpecWinClose" onclick="specWin('close');">Close Spectator Window</button>
+				</div>
+				<div id="heat-lane-assignments">
+					<div>
+						<table></table>
+					</div>
+				</div>
+			</div>
+			<div id="race-lane-results">
+				<button type="button" id="race-clear-display" onclick="clearDisplay()">Clear Display</button>
+				<div class="buttons-flex-contain">
+					<button type="button" id="heat-button" disabled onclick="raceUpdate('accept')">Accept Heat Results</button>
+					<button type="button" id="redo-heat" disabled onclick="raceUpdate('redo')">Redo Heat</button>
+				</div>
+				<ul id="race-lane">
+				</ul>
+			</div>
+			<div id="racer-race-results">
+				<h2>Racers</h2>
+				<table id="racer-table">
+					<tr><th>Car<br/>#</th><th>Racer Name</th><th>Racer<br>Rank</th><th>Total<br/>Time (s)</th></tr>
+				</table>
+			</div>
+			<div id="current-round">
+				<div class="flex-title">
+					<h2>Round: <span id="current-round-number"></span></h2>
+					<h2>Heat: <span id="current-heat-number"></span></h2>
+				</div>
+				<table id="round-lineup-table">
+				</table>
+				
+			</div>
+		</div>
+		<!--End Tab Content - Run the Race-->
+
+		<!--Tab Content - Configuration-->
+		<div class="tabcontent" id="PDT-configT">
+			<h2>This page is still being developed.  No functionality at present.</h2>
+			<p>Timer configuration:
+				<select>
+					<option value="Arduino" selected>PDT-Arduino</option>
+					<option value="custom">Custom Timer</option>
+				</select>
+			</p>
+			<div id="timer-config">
+				<p>Serial Port:
+					<select id="serial-port-list">
+						<option value="auto">auto</option>
+					</select>
+				</p>
+				<p>Serial Commands</p>
+				<ul>
+					<li>Timer Version : V</li>
+					<li>Gate Query : G</li>
+					<li>Number of Lanes : N</li>
+					<li>Timer Reset : R</li>
+					<li>Force End : F</li>
+					<li>Trigger Start Solenoid: S</li>
+				</ul>
+
+				<p>Serial Messages</p>
+				<ul>
+					<li>Timer Ready : K</li>
+					<li>Command Acknowledge : .</li>
+					<li>Gate Open : O</li>
+					<li>Timer Version : vert=<i>[version number]</i></li>
+					<li>Number of Lanes : numl=<i>[integer]</i></li>
+					<li>Lane 1 Time : 1 - <i>[time in seconds]</i></li>
+					<li>Lane 2 Time : 2 - <i>[time in seconds]</i></li>
+					<li>Lane 3 Time : 3 - <i>[time in seconds]</i></li>
+				</ul>
+			</div>
+		</div>
+		<!--End Tab Content - Configuration-->
+
+	</div>
+	<!--End TabBox-->
+
+</div>
+<!--End Main-->
+
+<footer class="footer">
+	<span class="footer-item" id="timer-version"> </span>
+	<span class="footer-item" id="lanes-timer"> </span>
+	<span class="footer-item" id="status-timer"> </span>
+	<span class="footer-item" id="gate-timer"> </span>
+	<span class="footer-item" id="serial-timer"> </span>
+</footer>
+</body>
+
+</html>

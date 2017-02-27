@@ -1,0 +1,257 @@
+#race-current-heat{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-flow: row nowrap;
+    width: 100%;
+    background: #eee;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+    margin-bottom: 10px;
+    padding: 10px 10px 5px 10px;
+    height: 100px;
+    min-width: 730px;
+}
+#race-current-heat #race-divButtons-1{
+    flex: 0 0 200px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+#race-current-heat button {
+    flex: 1 auto;
+    margin-right: 5px;
+}
+
+#heat-lane-assignments {
+    display: flex;
+    flex-flow: row nowrap;
+    flex: 1 0 auto;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
+}
+#heat-lane-assignments table {
+    width: 100%;
+    border-collapse: collapse;
+}
+#heat-lane-assignments div {
+    width: 100%;
+}
+#heat-lane-assignments th {
+    border: 1px solid rgb(0,0,0);
+}
+#heat-lane-assignments td {
+    border: 1px solid rgb(0,0,0);
+    line-height: 1.5;
+}
+#heat-lane-assignments td:nth-child(odd) {
+    width: 4em;
+    text-align: center;
+}
+#heat-lane-assignments tr:nth-child(1) {
+    border-top: 0px none black;
+    border-left: 0px none black;
+    border-right: 0px none black;
+}
+#heat-lane-assignments th:nth-child(1) {
+    border-top: 0px none black;
+    border-left: 0px none black;
+    border-right: 0px none black;
+}
+#heat-lane-assignments tr:nth-child(2), #heat-lane-assignments tr:nth-child(3) {
+    background: rgba(0,63,135,1.0);
+    color: rgba(252,209,22,1.0);
+}
+
+#racer-race-results{
+    float: left;
+    height: calc(100% - 200px);
+    background: #eee;
+    margin-left: 20px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+    padding: 10px;
+    font-size: 0.9em;
+    width: 35%;
+}
+#racer-race-results table {
+	border-collapse: collapse;
+    width: 100%;
+}
+#racer-race-results th {
+	border-bottom: 2px solid rgb(0,63,135);
+	padding-right: 10px;
+	vertical-align: bottom;
+}
+#racer-race-results td {
+	padding-right: 10px;
+}
+#racer-race-results td:nth-child(1), #racer-race-results th:nth-child(1) {
+	width: 3em;
+	text-align: center; 
+}
+#racer-race-results td:nth-child(2), #racer-race-results th:nth-child(2) {
+	width: 14em;
+	text-align: left; 
+}
+#racer-race-results td:nth-child(3), #racer-race-results th:nth-child(3) {
+	width: 6em;
+	text-align: center; 
+}
+#racer-race-results td:nth-child(4), #racer-race-results th:nth-child(4) {
+	width: 7em;
+	text-align: left; 
+}
+#racer-race-results tr:nth-child(even) {
+	background-color: rgba(0,63,135,0.2);
+}
+
+#current-round {
+    float: left;
+    height: calc(100% - 200px);
+    background: #eee;
+    margin-left: 20px;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+    padding: 10px;
+    font-size: 0.9em;
+    width: 60%;
+    overflow-y: auto;
+}
+#current-round .flex-title {
+    display: flex;
+    justify-content: space-between;
+}
+#current-round h2 {
+    margin-right: 20px;
+    min-width: 10em;
+}
+#current-round table {
+    border-collapse: collapse;
+    border: 1px solid black;
+    width: 100%;
+}
+
+#current-round th {
+    background: #003f87;
+    color: #fcd116;
+    border: 1px solid black;
+    text-align: center;
+    vertical-align: bottom;
+}
+#current-round td {
+    border: 1px solid black;
+}
+#current-round tr:nth-child(even) {
+    background-color: rgba(0,63,135,0.2)
+}
+#current-round td:nth-child(1) {
+    text-align: center;
+}
+#current-round td:nth-child(even) {
+    text-align: center;
+}
+#current-round ul {
+    list-style: none;
+    font-size: 1.5em;
+    font-variant: small-caps;
+    font-weight: bolder;
+    color: rgb(206,17,38);
+}
+
+#race-lane-results {
+    /*float: left;
+    height: calc(100% - 110px);*/
+    /*margin-left: 20px;*/
+    width: 100%;
+
+}
+
+#race-lane-results .buttons-flex-contain {
+    width: calc(100% - 100px);
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+#race-lane-results .buttons-flex-contain button{
+    margin-right: 5px;
+    min-width: 150px;
+}
+#race-lane-results .buttons-flex-contain #heat-button{
+    margin-left: calc(((100% + 100px) / 2) - 250px);
+}
+#race-lane-results .buttons-flex-contain #redo-heat{
+    margin-right: auto;
+}
+#race-lane-results #race-clear-display {
+    float: left;
+    min-width: 100px;
+}
+#race-lane {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    align-items: center;
+    min-height: 40px;
+    font-size: 1.0em;
+    list-style: none;
+    margin: 0px 0px 10px 0px;
+    padding: 0;
+    background-color: #eee;
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.3);
+}
+
+#race-lane li {
+    border: 1px solid #003366;
+    background-color: rgba(0,51,102,0.4);
+    padding-left: 5px;
+    margin-left: 5px;
+    text-align: left;
+    flex: 0 0 225px;
+}
+#race-lane li.laneMask {
+    background: none;
+    border: none;
+    /*font-size: 0.8em;*/
+}
+#race-lane li.winner1{
+    border: 2px ridge #ce1126;
+    background-color: #fcd116;
+}
+#race-lane li.winner1::after {
+    font-family: FontAwesome;
+    content: "1st  \f091";
+    padding-left: 10px;
+    font-size: 1.2em;
+    padding-right: 5px;
+    padding-top: 5px;
+    color: #ce1126;
+    font-weight: bold;
+}
+#race-lane li.winner2::after {
+    content: "2nd";
+    padding-left: 10px;
+    font-size: 1.2em;
+    padding-right: 5px;
+    padding-top: 5px;
+}
+#race-lane li.winner3::after {
+    content: "3rd";
+    padding-left: 10px;
+    font-size: 1.2em;
+    padding-right: 5px;
+    padding-top: 5px;
+}
+#race-lane .LEDdisplay {
+    font-family: LEDfont;
+    color: #ce1126;
+    background-color: black;
+    font-size: 2.0em;
+    border: 1px solid #333;
+    margin: 2px 0px 2px 2px;
+}
+

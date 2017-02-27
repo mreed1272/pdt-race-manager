@@ -1,0 +1,139 @@
+
+.flex-contain {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    /*height: 100px;*/
+    align-items: flex-start;
+    margin-bottom: 5px;
+} 
+
+.flex-contain span {
+    border: 1px solid blue;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    font-size: 1.5em;
+}
+
+#lane-times-contain {
+    float: left;
+    margin-left: 20px;
+    margin-right: auto;
+    height: calc(100vh - 255px);    
+}
+.laneTimes {
+    /*float: left;*/
+    font-size: 1.4em;
+    list-style: none;
+    width: 350px;
+    margin: 0;
+    padding: 0;
+    background-color: #eee;
+}
+.laneTimes li {
+    border: 1px solid #003366;
+    background-color: rgba(0,51,102,0.4);
+    padding-left: 10px;
+    margin-left: 0;
+    text-align: left;
+    /*float: left;*/
+}
+.laneTimes li.laneMask {
+    background: none;
+    border: none;
+    font-size: 0.7em;
+}
+.laneTimes li.winner1{
+    border: 2px ridge #ce1126;
+    background-color: #fcd116;
+}
+.laneTimes li.winner1::after {
+    font-family: FontAwesome;
+    content: "1st  \f091";
+    padding-left: 30px;
+    font-size: 1.2em;
+    padding-right: 10px;
+    padding-top: 10px;
+    color: #ce1126;
+    font-weight: bold;
+}
+.laneTimes li.winner2::after {
+    content: "2nd";
+    padding-left: 30px;
+    font-size: 1.2em;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+.laneTimes li.winner3::after {
+    content: "3rd";
+    padding-left: 30px;
+    font-size: 1.2em;
+    padding-right: 10px;
+    padding-top: 10px;
+}
+.LEDdisplay {
+    font-family: LEDfont;
+    color: #ce1126;
+    background-color: black;
+    font-size: 2.4em;
+    border: 1px solid #333;
+    margin: 2px 0px 2px 10px;
+}
+#serial-display {
+    float: left;
+    margin-left: 20px;
+    margin-right: auto;
+    height: calc(100vh - 255px);
+}
+#serial-command {
+    background: #eee;
+}
+#serial-output {
+    border: 0px groove black;
+    padding: 5px;
+    height: calc(100% - 30px);
+    overflow: auto;
+    background: #eee;
+}
+#timer-history-contain {
+    float: left;
+    margin-left: 20px;
+    margin-right: auto;
+    height: calc(100vh - 255px);    
+}
+
+#table-history-contain{
+    width: 100%;
+    background: #eee;
+    height: calc(100% - 30px);
+    border: 0px solid black;
+    overflow: auto;
+    padding: 5px;
+}
+
+.div-contain-shadow {
+    box-shadow: 3px 3px 8px 0px rgba(0,0,0,0.4);
+    
+}
+#lane-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #eee;
+}
+#lane-history-table tr {
+    vertical-align: top;
+}
+#lane-history-table tr:nth-child(even) {
+    background-color: rgba(0,63,135,0.2);
+}
+#lane-history-table th, #lane-history-table td {
+    border-right: 0px solid black;
+    width: 10em;
+}
+#lane-history-table th {
+    border-bottom: 2px solid rgba(0,63,135,0.8);
+}
